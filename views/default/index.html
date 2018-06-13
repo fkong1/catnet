@@ -1,0 +1,68 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+{{end}}
+<link href="/Final_Project/static/css/custom.css" rel="stylesheet" type="text/css">
+<link href="/Final_Project/static/css/stupid.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+
+function autodivheight(){ //函数：获取尺寸
+    var get_width= $(document.body).width();
+    //alert(get_width);
+    if(get_width < 741){
+        document.getElementById("re_height_main").style.height="500px";
+    }else{
+        document.getElementById("re_height_main").style.height="360px";
+    }
+}
+window.onload=autodivheight;
+window.onresize = autodivheight;
+
+</script>
+
+
+<div class="div_video">
+    <video autoplay muted loop style="width: 100%;z-index: -1;">
+      <source src="../static/video/video_bg.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div id="re_height_main" class="main_content">
+
+  <!-- Here goes your main HTML code. -->
+    <div class="box_inner">
+        <div class="color-block bgcolor1"><img src="Final_Project/../../static/images/script.png">　Story
+            <div class="box_text">
+                Warm, touching resuce Story. Come to Joining us.
+                <div class="link_more">
+                    <a href="{{=URL('default','story')}}">More...</a>
+                </div>
+            </div>
+        </div>
+        <div class="color-block bgcolor2"><img src="Final_Project/../../static/images/experiment-results.png">　Live
+            <div class="box_text">
+                Sharing your experiences, photo online with our other friends.
+                <div class="link_more">
+                    <a href="{{=URL('default','experience')}}">More...</a>
+                </div>
+            </div>
+        </div>
+        <div class="color-block bgcolor3"><img src="Final_Project/../../static/images/shopping-cart.png">　Shop
+            <div class="box_text">
+                You can find many different food, Litter, Toy., etc
+                <div class="link_more">
+                     <a href="{{=URL('default','shop')}}">More...</a>
+                </div>
+            </div>
+        </div>
+        <div class="color-block bgcolor4"><img src="Final_Project/../../static/images/pet-house.png">　Save
+            <div class="box_text">
+                The Latest Rescue & Adoption Information.
+                <div class="link_more">
+                   <a href="{{=URL('default','adoption')}}">More...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

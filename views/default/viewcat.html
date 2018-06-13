@@ -1,0 +1,63 @@
+{{extend 'layout.html'}}
+<style>
+.btn, button, [type=button], [type=submit] {background-color:#2ecc40; color:white}
+      #map {
+        height: 730px;
+      }
+</style>
+      {{q =(db.catInfor.id == request.args(0))}}
+      {{cl = db(q).select().first()}}
+      {{for cl in db(db.catInfor.id == cl).select(db.catInfor.ALL):}}
+
+
+      {{pass}}
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRl4t0vXeEuxpVvj7DRNxygV_GIToVBjg"></script>
+    <script>
+      // In the following example, markers appear when the user clicks on the map.
+      // Each marker is labeled with a single alphabetical character.
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var labelIndex = 0;
+
+      function initialize() {
+        var bangalore = {
+            lat: "{{=cl.lat}}" * 1,
+            lng: "{{=cl.lng}}" * 1
+        };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: bangalore
+        });
+
+        // This event listener calls addMarker() when the map is clicked.
+        google.maps.event.addListener(map, 'click', function(event) {
+          addMarker(event.latLng, map);
+        });
+
+        // Add a marker at the center of the map.
+        addMarker(bangalore, map);
+      }
+
+      // Adds a marker to the map.
+      function addMarker(location, map) {
+        // Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        var marker = new google.maps.Marker({
+          position: location,
+          label: "{{=cl.locationA}}",
+          map: map,
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+<div class= "view_cat_content" >
+    <h2>View Cat Information for Adoption</h2>
+
+        <div class="view_cat_infor">
+        <div class="view_form">
+            {{=form}}
+        </div>
+        <div id="map" class="map_location"></div>
+    </div>
+</div>

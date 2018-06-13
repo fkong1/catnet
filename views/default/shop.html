@@ -1,0 +1,98 @@
+{{extend 'layout.html'}}
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
+<script>
+   var get_userlist = "{{=URL('api', 'get_userlist')}}";
+   var add_image = "{{=URL('api', 'add_image')}}";
+   var get_user_images = "{{=URL('api', 'get_user_images')}}";
+   var set_price = "{{=URL('api', 'set_price')}}";
+   var user_url  = "{{=URL('api', 'user')}}";
+   var purchase_url  = "{{=URL('api', 'purchase',hmac_key=session.hmac_key)}}";
+   var currentid;
+</script>
+{{end}}
+<style>
+    input:invalid, input.error, textarea:invalid, textarea.error {
+    background: #effdfc;
+}
+        </style>
+<div style="height:900px;">
+<!-- Here goes your main HTML code. -->
+<div id="vue-div" class="display:none">
+   <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
+   <div class="container" v-if="!user">
+      <div style="padding:20px;line-height: 1.5;">
+         Please Log in or Sign up. <br/>
+         <a href="{{=auth.settings.login_url + '?_next=' + auth.settings.login_next}}">Log in</a> <br/>
+         <a href="{{=URL('user/register') + '?_next=' + auth.settings.login_next}}">Sign up</a> <br/>
+      </div>
+   </div>
+   <div class="container padded" v-if="user&&!is_checkout">
+      <div class="image_space threequarters">
+         <!-- Left part of the page -->
+         <div style="display:flex;padding-left:15px;">
+            <div v-if="self_page" style="margin-left: 5px; width:15px;float:left;">
+               <!-- Code to upload files, with control buttons -->
+               <div id="uploader_div" style="display:none">
+                  Upload an image file: <input id="file_input" type="file" accept="image/jpeg" style="width:200px;"><br/>
+                  Input the price:<input id="price_input" type="number" v-model='price' style="width:200px;"><br/>
+               </div>
+               <button v-if="is_uploading" v-on:click="upload_file">Submit</button>
+               <button v-if="!is_uploading" v-on:click="open_uploader"><i style ="height:15px;"class="fa fa-plus"></i></button>
+               <button v-if="is_uploading"  v-on:click="close_uploader">Cancel</button>
+            </div>
+            <button style="margin-left:5px;" v-if="cart.length>0" v-on:click="checkout" >CHECKOUT</button>
+         </div>
+         <div class="image_container">
+            <!-- Put here the code to display the images -->
+            <ul class="container">
+               <!-- The following is an example -->
+               <li v-for="image in user_images" class="card lifted padded quarter">
+                  <img v-bind:src="image.image_url" height="200px" width="200px" class="padded"/>
+                  <span style="padding-left:20px;padding-bottom:10px;display: block; font-weight:bold;">$
+                  <input v-model='image.price' type='number' v-on:blur='set_price(image.id)' v-if="image.created_by==user.id" style="width:100px; font-weight:bold"/>
+                  <label v-if="image.created_by!=user.id" >${image.price}</label>
+                  <i class='fa fa-shopping-cart' v-on:click="change_cart(image.id)"></i>
+                  <span v-if="cart.indexOf(image.id)>-1"><i class='fa fa-check'></i></span>
+                  </span>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="user_space quarter right">
+         <!-- Right part of the page -->
+         <table class="fill" id="user_selector">
+            <tbody>
+               <tr class="center">
+                  <!-- This row is you; code for getting your own images, and for setting self_page -->
+                  <td v-on:click="get_user_images(user.id,true)" :style="user.id==curid?'background-color:#c3f6f4; font-weight:bold;':'background-color:white'">${user.first_name}</td>
+               </tr>
+               <!-- Then, one row for each person. -->
+               <tr class="center" v-for="u in user_list">
+                  <td v-on:click="get_user_images(u.id,false)" :style="u.id==curid?'background-color:#c3f6f4; font-weight:bold;':'background-color:white'">${u.first_name}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div v-if='user&&is_checkout' id='cart_list'>
+      <div class="image_container">
+         <!-- Put here the code to display the images -->
+         <ul class="container">
+            <!-- The following is an example -->
+            <li v-for="image in cart_images" class="card lifted padded quarter">
+               <img v-bind:src="image.image_url" height="200px" width="200px" class="padded"/>
+               <span style="padding-left:20px;padding-bottom:10px;display: block;">
+               <label>Price: ${image.price}</label>
+               </span>
+            </li>
+         </ul>
+      </div>
+      <span style="padding:20px;">Your total price: $ ${cart_total}</span><br/>
+      <button style="margin-top:18px; float: left; margin-left:20px;" v-on:click="pay()">PAY</button><br/>
+      <button v-on:click="goback()">Continue shopping</button>
+   </div>
+</div></div>
+

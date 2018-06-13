@@ -1,0 +1,115 @@
+{{extend 'layout.html'}}
+
+<script type="text/javascript">
+function autodivheight(){ //函数：获取尺寸
+    var get_width= $(document.body).width();
+    //alert(get_width);
+    if(get_width < 526){
+        document.getElementById("re_height").style.height="3345px";
+      //  alert("aaa");
+    }else if(get_width>=526 && get_width<788){
+        document.getElementById("re_height").style.height="1750px";
+       // alert("bbb");
+    }else if(get_width>=788 && get_width<1050){
+        document.getElementById("re_height").style.height="1400px";
+       // alert("ccc");
+    }else if(get_width>=1050 && get_width<1313){
+        document.getElementById("re_height").style.height="1080px";
+        //alert("ddd");
+    }else{
+        document.getElementById("re_height").style.height="740px";
+    }
+}
+window.onload=autodivheight;
+window.onresize = autodivheight;
+</script>
+
+<div id="re_height" style="height:740px;padding-left: 10%;padding-right: 10%;padding-top: 2%;">
+
+  <!-- Here goes your main HTML code. -->
+    <!-- the user is login-->
+    {{if auth.user is not None:}}
+
+    <p><a class ="btn green" style="margin-left: 5px;" href = "{{=URL('default','addcat')}}"><i class="fa fa-plus"></i>Add Adoption Infor</a>
+    </p>
+
+        {{for cl in catInfor:}}
+            {{if auth.user.email == cl.user_email:}}
+                <div class = "catInfor">
+                    <div class = "catInfor_text">
+                        <img style="width:190px; height:auto;margin-bottom: 10px;" src="{{=URL('default','download', args=cl.picture)}}" />
+                        <div class="catInfor_catName">{{=cl.catName}}</div>
+                        <div class="catInfor_line">{{=cl.catGender}}</div>
+                        <div class="catInfor_line">{{=cl.catBreed}}</div>
+                        <div class="catInfor_line">{{=cl.catAge}}</div>
+                    </div>
+
+                    <div class="catInfor_button_list">
+                        <div class="right">
+                            <a class = "btn green" href="{{=URL('default','editcat',args=[cl.id])}}"><i class = "fa fa-edit"></i></a>
+                            <!-- if is public -->
+                            {{if cl.is_available is True:}}
+                                <a class = "btn green" href="{{=URL('default','toggle_available',args=[cl.id])}}"><i class = "fa fa-check disabled "></i></a>
+                            {{else:}}
+                            <!-- else is private-->
+                                <a class = "btn gray" href="{{=URL('default','toggle_available',args=[cl.id])}}"><i class = "fa fa-times disabled "></i></a>
+                            {{pass}}
+
+                        </div>
+                    </div>
+                </div>
+            {{else:}}
+                {{if cl.is_available is True:}}
+                    <div class = "catInfor">
+                        <div class = "catInfor_text">
+                            <img style="width:190px; height:auto;margin-bottom: 10px;" src="{{=URL('default','download', args=cl.picture)}}" />
+                            <div class="catInfor_catName">{{=cl.catName}}</div>
+                            <div class="catInfor_line">{{=cl.catGender}}</div>
+                            <div class="catInfor_line">{{=cl.catBreed}}</div>
+                            <div class="catInfor_line">{{=cl.catAge}}</div>
+
+                        </div>
+
+                        <div class="un_catInfor_button_list">
+                            <div class="right">
+                                <a class = "btn green" href="{{=URL('default','viewcat',args=[cl.id])}}"><i class = "fa fa-eye disabled "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {{pass}}
+            {{pass}}
+        {{pass}}
+        {{if not catInfor:}}
+            <p>You don't have any catInfor. Press on the Add button above to create one.</p>
+        {{pass}}
+    {{else:}}
+        <h1 class = "main_catName">Welcome!</h1>
+        <p class = "explanation"> This site will help you organize you life by
+        staring your catInfor.
+            Please log in to use it.</p>
+
+        {{for cl in catInfor:}}
+            {{if cl.is_available is True:}}
+                <div class = "un_catInfor">
+                    <div class = "un_catInfor_text">
+                        <div class="un_catInfor_catName">{{=cl.catName}}
+                            {{if cl.is_available is True:}}
+                                - available
+                            {{pass}}
+                        </div>
+                        <div class="un_catInfor_content">{{=cl.catInfor}}</div>
+                    </div>
+
+                    <div class="un_catInfor_button_list">
+                        <div class="right">
+                            <a class = "btn gray" ><i class = "fa fa-users disabled "></i></a>
+                        </div>
+                    </div>
+                </div>
+            {{pass}}
+        {{pass}}
+        <div class = "login_button">
+            <a href = "{{=URL('default','user')}}" class = "btn green">Login</a>
+        </div>
+    {{pass}}
+</div>
