@@ -1,0 +1,219 @@
+a {
+    color:#26a69a;
+}
+ a:not(.btn):not(.noeffect):hover {
+    color:#26a69a
+}
+ a:not(.btn):not(.noeffect):after {
+    background-color:#26a69a;
+}
+ .btn, button, [type=button], [type=submit] {
+    background-color:#26a69a;
+     color:white
+}
+ .progress .determinate {
+    background-color:#26a69a
+}
+ .progress .indeterminate {
+    background-color:#26a69a
+}
+ .tags > span {
+    background-color: #26a69a
+}
+ .tags.dismissible > span.off:hover {
+    background-color:#26a69a
+}
+ .link_more a{
+     color:white !important;
+}
+ .link_more a:not(.btn):not(.noeffect):after {
+     background-color:white !important;
+}
+ .div_video{
+     z-index: -1;
+     margin-bottom: -25%;
+}
+ #div_foot{
+     text-align: center;
+     position: relative;
+     height:13%;
+     padding-top: 4.5%;
+}
+ .main_content{
+     z-index: 0;
+     background-color:rgba(0,0,0,0.5);
+    /*border: #01ff70 1px solid;
+    */
+     min-height:300px;
+     padding-top: 2.5%;
+     padding-bottom: 2.5%;
+     position:relative;
+}
+ .box_inner{
+    /*border: #85144b 1px solid;
+    */
+     min-height: 20%;
+     padding-left: 10%;
+}
+ .color-block img{
+     rgba(255,255,255,0.3);
+}
+ .color-block{
+    /*border: #ffdc00 1px solid;
+    */
+     width: 20%;
+     height:20%;
+     min-width: 150px;
+     min-height: 150px;
+     height:230px;
+     float: left;
+     position: relative;
+     margin-left: 1.25%;
+     margin-right: 1.25%;
+     color:rgba(255,255,255,0.3);
+     font-weight: bold;
+     text-align: right;
+     padding-right: 30px;
+     padding-top: 15px;
+     font-size: x-large;
+}
+ .bgcolor1{
+     background: #ea8213;
+     z-index: 1;
+}
+ .bgcolor2{
+     background: #e0c011;
+     z-index: 1;
+}
+ .bgcolor3{
+     background: #1cb8b1;
+     z-index: 1;
+}
+ .bgcolor4{
+     background: #3abe6b;
+     z-index: 1;
+}
+ .box_text{
+     height:160px;
+     font-size:14px;
+     font-weight: lighter;
+     text-align: left;
+     padding-left: 20px;
+     padding-top:10px;
+     color:white;
+}
+ .link_more{
+     padding-top: 20px;
+     padding-bottom: 10px;
+     height:50px;
+     text-align: right;
+     font-weight: normal;
+}
+ .label_Infor{
+     width:100px;
+     float: left;
+}
+ .catInfor{
+     width: 200px;
+     margin: 5px;
+     border: 1px solid #abecb2;
+     float: left;
+}
+ .catInfor_text{
+     padding: 5px;
+}
+ .catInfor_catName{
+     font-weight: bold;
+}
+ .catInfor_line{
+     margin-top: 1px;
+     margin-bottom: 1px;
+}
+ #re_height{
+
+     background-image: url("../images/thumb-1920-4400.jpg") ;
+    /*
+    background-image: url("../images/thumb-1920-4400.jpg") ;
+    */
+
+}
+ .my_content{
+     hight:100%;
+     padding-left: 10%;
+     padding-right: 10%
+}
+ .story_title_box_inner{
+     font-family:Georgia;
+     font-weight: bold;
+     color:black;
+     font-size:45px;
+     margin-right:30px;
+     margin-left: 30px;
+     margin-bottom: 60px;
+     margin-top:-120px;
+     padding-bottom:50px;
+     word-spacing: 10px;
+}
+ .story{
+     margin: 5px;
+     padding-top:10px;
+     padding-bottom: 70px;
+     padding-left:45px;
+     padding-right: 10px;
+     margin-bottom: 100px;
+     height:auto;
+}
+ .story_text{
+     font-size: 30px;
+     width: 75%;
+     float:left;
+}
+ .story_title{
+     font-family:courier;
+     font-weight: bold;
+     font-size:100%;
+     padding-bottom: 10px;
+     height: auto;
+}
+ .story_author{
+     font-family:Trebuchet MS;
+     font-size:13px;
+     padding-bottom: 7px;
+}
+ .story_datetime{
+     font-family:Comic Sans MS;
+     font-size:10px;
+     padding-bottom: 5px;
+}
+ .story_content{
+     font-family:'Times New Roman';
+     font-size:15px;
+     padding-bottom: 70px;
+}
+ .story_button_list{
+     float:right;
+     padding-top:30px;
+     padding-right: 10px;
+     display: block;
+}
+ .story_button_list{
+     float:right;
+     padding-top:15px;
+     padding-right: 10px;
+}
+ .view_cat_content{
+     hight:730px;
+     padding-left: 10%;
+     padding-right: 10%;"
+ }
+.view_cat_infor{
+}
+.view_form{
+    width: 50%;
+    height:730px;
+    float: left;
+}
+.map_location{
+    width: 50%;
+    height:730px;
+}
