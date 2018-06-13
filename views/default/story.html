@@ -1,124 +1,148 @@
 {{extend 'layout.html'}}
+
 {{block head}}
 {{end}}
-<div class="story_main_content" style="height: 180%; background-color:floralwhite;">
-   <div class="story_pic">
-      <picture>
-         <img src="../static/images/eggette_3.png" type="png" width="100%" height="auto">
-      </picture>
-   </div>
-   <div class="story_title_box" style="width: 85%;">
-      <h1 class="story_title_box_inner" style="font-family:Georgia;font-weight: bold; color:black; font-size:45px; margin-right:30px; margin-left: 30px;
-         margin-bottom: 60px; margin-top:-120px; padding-bottom:50px; word-spacing: 10px;">
-         Latest  Stories
-      </h1>
-   </div>
-   {{if auth.user is not None:}}
-   <div style="padding-left: 55px"><p>
-      <a class ="btn orange" href="{{=URL('default','add')}}"><i class="fa fa-plus"></i>  Create now! </a>
-   </p>
-   </div>
-   {{for cl in story:}}
-   {{if cl.user_email == auth.user.email or cl.is_public:}}
-   <div class="story" style="margin: 5px; padding-top:10px; padding-bottom: 70px; padding-left:45px; padding-right: 10px; margin-bottom: 100px;height:auto;" >
-      <div class="story_text" style=" font-size: 30px; width: 75%; float:left;">
-         <div class="story_title" style="font-family:courier;font-weight: bold;font-size:100%;padding-bottom: 10px;height: auto; ">
-            {{=cl.title}}
-         </div>
-         <div class="story_author" style="font-family:Trebuchet MS;font-size:13px;padding-bottom: 7px;">
-            {{=cl.author}}
-         </div>
-         <div class="story_datetime" style="font-family:Comic Sans MS;font-size:10px;padding-bottom: 5px;">
-            {{=cl.datetime}}
-         </div>
-         <div class="story_content" style="font-family:'Times New Roman';font-size:15px;padding-bottom: 70px; ">
-            {{=cl.story}}
-         </div>
-      </div>
-      {{if cl.user_email == auth.user.email:}}
-      <div class="story_button_list" style="float:right; padding-top:30px;padding-right: 10px; display: block;" >
-         <div class="right">
-            <a class="btn" href="{{=URL('default','edit', args=[cl.id])}}" style="background-color:#ea8213;color: white; display: block;">
-            <i class="fa fa-edit">
-            </i>
-            </a>
-            <a class="btn" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}"style="background-color:#ea8213;color: white;display: block;">
-            <i class="fa fa-trash">
-            </i>
-            </a>
-            <a class="btn" href="{{=URL('default','toggle_public', args=[cl.id])}}" style="background-color:#ea8213;color: white;display: block;">
-            {{if (cl.is_public):}}
-            <i class="fa fa-users"></i>
-            {{else:}}
-            <i class="fa fa-user"></i>
+
+<div class="story_main_content" style="height: 300%; background-color:floralwhite;">
+
+    <div class="story_pic">
+        <picture>
+            <img src="../static/images/eggette_3.png" type="png" width="100%" height="auto">
+        </picture>
+
+    </div>
+
+    <div class="story_title_box" style="width: 85%;">
+        <h1 class="story_title_box_inner" style="font-family:Georgia;font-weight: bold; color:black; font-size:45px; margin-right:30px; margin-left: 30px;
+        margin-bottom: 60px; margin-top:-120px; padding-bottom:50px; word-spacing: 10px;">
+            Latest  Stories
+        </h1>
+    </div>
+
+    {{if auth.user is not None:}}
+    <p>
+        <a class="create_btn" href="{{=URL('default','add')}}" style="background-color:#ea8213;color: white;border:1px solid darkgray;margin-left: 20px;"><i class="fa fa-plus"></i>  Create now! </a>
+    </p>
+
+        {{for cl in story:}}
+            {{if cl.user_email == auth.user.email or cl.is_public:}}
+                <div class="story" style="margin: 5px; padding-top:10px; padding-bottom: 70px; padding-left:45px; padding-right: 10px; margin-bottom: 100px;height:auto;" >
+                    <div class="story_text" style=" font-size: 30px; width: 75%; float:left;">
+                        <div class="story_title" style="font-family:courier;font-weight: bold;font-size:100%;padding-bottom: 10px;height: auto; ">
+                            {{=cl.title}}
+                        </div>
+                        <div class="story_author" style="font-family:Trebuchet MS;font-size:13px;padding-bottom: 7px;">
+                            {{=cl.author}}
+                        </div>
+                        <div class="story_datetime" style="font-family:Comic Sans MS;font-size:10px;padding-bottom: 5px;">
+                            {{=cl.datetime}}
+                        </div>
+                        <div class="story_content" style="font-family:'Times New Roman';font-size:15px;padding-bottom: 70px; ">
+                            {{=cl.story}}
+                        </div>
+
+                    </div>
+
+                    {{if cl.user_email == auth.user.email:}}
+                    <div class="story_button_list" style="float:right; padding-top:30px;padding-right: 10px; display: block;" >
+                        <div class="right">
+                            <a class="btn" href="{{=URL('default','edit', args=[cl.id])}}" style="background-color:#ea8213;color: white; display: block;">
+                                <i class="fa fa-edit">
+                                </i>
+                            </a>
+
+                            <a class="btn" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}"style="background-color:#ea8213;color: white;display: block;">
+                                <i class="fa fa-trash">
+
+                                </i>
+                            </a>
+
+                            <a class="btn" href="{{=URL('default','toggle_public', args=[cl.id])}}" style="background-color:#ea8213;color: white;display: block;">
+                                {{if (cl.is_public):}}
+                                    <i class="fa fa-users"></i>
+                                {{else:}}
+                                    <i class="fa fa-user"></i>
+                                {{pass}}
+                            </a>
+                        </div>
+                    </div>
+
+                    {{else:}}
+                    <div class="story_button_list" style="float:right; padding-top:15px;padding-right: 10px;">
+                        <div class="right">
+                            <a class="btn gray"style="background-color:#ea8213;color: white;opacity: 0.6;cursor: not-allowed;display: block;">
+                                <i class="fa fa-edit">
+                                </i>
+                            </a>
+                            <a class="btn gray" style="background-color:#ea8213;color: white;opacity: 0.6;cursor: not-allowed;display: block;">
+                                <i class="fa fa-trash">
+                                </i>
+                            </a>
+
+                            <a class="btn gray" style="background-color:#ea8213;color: white;opacity: 0.6;cursor: not-allowed;display: block;">
+                                <i class="fa fa-users">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                    {{pass}}
+                </div>
             {{pass}}
-            </a>
-         </div>
-      </div>
-      {{else:}}
-      <div class="story_button_list" style="float:right; padding-top:15px;padding-right: 10px;">
-         <div class="right">
-            <a class="btn gray"style="background-color:#ea8213;color: white;opacity: 0.6;cursor: not-allowed;display: block;">
-            <i class="fa fa-edit">
-            </i>
-            </a>
-            <a class="btn gray" style="background-color:#ea8213;color: white;opacity: 0.6;cursor: not-allowed;display: block;">
-            <i class="fa fa-trash">
-            </i>
-            </a>
-            <a class="btn gray" style="background-color:#ea8213;color: white;opacity: 0.6;cursor: not-allowed;display: block;">
-            <i class="fa fa-users">
-            </i>
-            </a>
-         </div>
-      </div>
-      {{pass}}
-   </div>
-   {{pass}}
-   {{pass}}
-   {{if not story:}}
-   <div style="padding-left: 55px"><p>There is no story available now. Press on the Add button above to create one!</p></div>
-   {{pass}}
-   {{else:}}
-   <h1 class="main_title">Welcome!</h1>
-   <p class ="explanation">This site will help you to learn more on your cats.
-      Please log in to use it.
-   </p>
-   <div class="login_button">
-      +
-      <a href="{{=URL('default', 'user')}}" class="btn">Login</a>
-   </div>
-   {{for cl in story:}}
-   {{if (cl. is_public):}}
-   <div class="story" style="border:2px solid black; padding-top:10px; padding-bottom: 100px; padding-left:45px; padding-right: 10px; margin-bottom: 150px;height:auto;">
-      <div class="story_text" style=" font-size: 150%; width: 75%; float:left;" >
-         <div class="story_title" style="font-family:courier;font-weight: bold;font-size:30px;padding-bottom: 10px;height: auto; ">
-            {{=cl.title}}
-         </div>
-         <div class="story_author" style="font-family:Trebuchet MS;font-size:13px;padding-bottom: 7px;">
-            {{=cl.author}}
-         </div>
-         <div class="story_datetime" style="font-family:Comic Sans MS;font-size:10px;padding-bottom: 5px;">
-            {{=cl.datetime}}
-         </div>
-         <div class="story_content" style="font-family:'Times New Roman';font-size:15px;padding-bottom: 70px; ">
-            {{=cl.story}}
-         </div>
-      </div>
-      <div class="story_button_list" style="float:right;padding-top:15px; padding-right: 10px;">
-         <div class="right">
-            <a class="btn gray" href="{{=URL('default','edit', args=[cl.id])}}"style="background-color:#ea8213;color: white;display: block;">
-            <i class="fa fa-edit">
-            </i>
-            </a>
-            <a class="btn gray" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}" style="background-color:#ea8213;color: white;display: block;">
-            <i class="fa fa-trash">
-            </i>
-            </a>
-         </div>
-      </div>
-   </div>
-   {{pass}}
-   {{pass}}
-   {{pass}}
+        {{pass}}
+
+
+        {{if not story:}}
+            <p>There is no story available now. Press on the Add button above to create one!</p>
+        {{pass}}
+
+        {{else:}}
+            <h1 class="main_title">Welcome!</h1>
+            <p class ="explanation">This site will help you to learn more on your cats.
+                    Please log in to use it.</p>
+
+            <div class="login_button">
+                +
+                <a href="{{=URL('default', 'user')}}" class="btn">Login</a>
+            </div>
+
+            {{for cl in story:}}
+
+                {{if (cl. is_public):}}
+                    <div class="story" style="border:2px solid black; padding-top:10px; padding-bottom: 100px; padding-left:45px; padding-right: 10px; margin-bottom: 150px;height:auto;">
+                        <div class="story_text" style=" font-size: 150%; width: 75%; float:left;" >
+                            <div class="story_title" style="font-family:courier;font-weight: bold;font-size:30px;padding-bottom: 10px;height: auto; ">
+                                {{=cl.title}}
+                            </div>
+                            <div class="story_author" style="font-family:Trebuchet MS;font-size:13px;padding-bottom: 7px;">
+                                {{=cl.author}}
+                            </div>
+                            <div class="story_datetime" style="font-family:Comic Sans MS;font-size:10px;padding-bottom: 5px;">
+                                {{=cl.datetime}}
+                            </div>
+                            <div class="story_content" style="font-family:'Times New Roman';font-size:15px;padding-bottom: 70px; ">
+                                {{=cl.story}}
+                            </div>
+                        </div>
+
+                        <div class="story_button_list" style="float:right;padding-top:15px; padding-right: 10px;">
+                            <div class="right">
+                                <a class="btn gray" href="{{=URL('default','edit', args=[cl.id])}}"style="background-color:#ea8213;color: white;display: block;">
+                                    <i class="fa fa-edit">
+                                    </i>
+                                </a>
+                                <a class="btn gray" href="{{=URL('default', 'delete', args=[cl.id], user_signature=True)}}" style="background-color:#ea8213;color: white;display: block;">
+                                    <i class="fa fa-trash">
+                                    </i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                {{pass}}
+
+        {{pass}}
+
+    {{pass}}
+
 </div>
+

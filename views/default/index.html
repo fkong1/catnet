@@ -5,44 +5,27 @@
 <link href="/Final_Project/static/css/custom.css" rel="stylesheet" type="text/css">
 <link href="/Final_Project/static/css/stupid.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript">
-
-function autodivheight(){ //函数：获取尺寸
-    var get_width= $(document.body).width();
-    //alert(get_width);
-    if(get_width < 741){
-        document.getElementById("re_height_main").style.height="500px";
-    }else{
-        document.getElementById("re_height_main").style.height="360px";
-    }
-}
-window.onload=autodivheight;
-window.onresize = autodivheight;
-
-</script>
-
-
 <div class="div_video">
     <video autoplay muted loop style="width: 100%;z-index: -1;">
       <source src="../static/video/video_bg.mp4" type="video/mp4">
     </video>
 </div>
 
-<div id="re_height_main" class="main_content">
+<div class="main_content">
 
   <!-- Here goes your main HTML code. -->
     <div class="box_inner">
         <div class="color-block bgcolor1"><img src="Final_Project/../../static/images/script.png">　Story
             <div class="box_text">
-                Warm, touching resuce Story. Come to Joining us.
+                Warm, touching resuce Story. Come to Joining us. Write your own story.<br><br>
                 <div class="link_more">
                     <a href="{{=URL('default','story')}}">More...</a>
                 </div>
             </div>
         </div>
-        <div class="color-block bgcolor2"><img src="Final_Project/../../static/images/experiment-results.png">　Live
+        <div class="color-block bgcolor2"><img src="Final_Project/../../static/images/experiment-results.png">　Experience
             <div class="box_text">
-                Sharing your experiences, photo online with our other friends.
+                Sharing your experiences, photo online with our other friends.<br><br>
                 <div class="link_more">
                     <a href="{{=URL('default','experience')}}">More...</a>
                 </div>
@@ -50,15 +33,16 @@ window.onresize = autodivheight;
         </div>
         <div class="color-block bgcolor3"><img src="Final_Project/../../static/images/shopping-cart.png">　Shop
             <div class="box_text">
-                You can find many different food, Litter, Toy., etc
+                You can find many different food, Litter, Accesories, Treats, Toy and HealthCare., etc
                 <div class="link_more">
                      <a href="{{=URL('default','shop')}}">More...</a>
                 </div>
             </div>
         </div>
-        <div class="color-block bgcolor4"><img src="Final_Project/../../static/images/pet-house.png">　Save
+        <div class="color-block bgcolor4"><img src="Final_Project/../../static/images/pet-house.png">　Adoption
             <div class="box_text">
                 The Latest Rescue & Adoption Information.
+                <br><br>Help us to save the cat.
                 <div class="link_more">
                    <a href="{{=URL('default','adoption')}}">More...</a>
                 </div>
